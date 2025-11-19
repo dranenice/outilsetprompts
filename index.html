@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outils et prompts</title>
+    <style>
+        :root {
+            --primary: #2c3e50;    /* Bleu nuit professionnel */
+            --accent: #3498db;     /* Bleu actif */
+            --success: #27ae60;    /* Vert sobre */
+            --warning: #f39c12;    /* Orange */
+            --danger: #c0392b;     /* Rouge */
+            --bg-body: #f4f6f9;    /* Gris très clair fond de page */
+            --bg-card: #ffffff;    /* Blanc fond de carte */
+            --text-main: #333333;
+            --text-muted: #666666;
+            --border-color: #e1e4e8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        /* Header Pro */
+        .header {
+            background-color: var(--bg-card);
+            color: var(--primary);
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border-bottom: 4px solid var(--primary);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        /* Section épurée */
+        .section {
+            background: var(--bg-card);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* Alertes et Info Boxes */
+        .warning {
+            background-color: #fff3cd;
+            padding: 20px;
+            border-left: 4px solid var(--warning);
+            border-radius: 4px;
+            margin-bottom: 25px;
+            color: #856404;
+        }
+        .warning h3 { color: #856404; margin-bottom: 10px; font-size: 1.2em; border: none; }
+
+        .info-box-blue {
+            margin-top: 40px; 
+            padding: 25px; 
+            background-color: #e3f2fd; 
+            border-radius: 6px; 
+            border-left: 4px solid #2196f3;
+            color: #0d47a1;
+        }
+
+        .info-box-green {
+            margin: 25px 0; 
+            padding: 25px; 
+            background-color: #e8f5e9; 
+            border-radius: 6px; 
+            border-left: 4px solid #4caf50;
+        }
+
+        /* Activités et Outils */
+        .activity {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .tool-category { margin-bottom: 40px; }
+        
+        .tool-category h3 {
+            color: var(--primary);
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 4px solid var(--accent);
+            background: none;
+            box-shadow: none;
+            display: block;
+            animation: none;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .tool-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .tool-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 25px 15px;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+        .tool-card:hover .tool-link { color: var(--accent); }
+
+        .tool-icon { font-size: 2.5em; margin-bottom: 15px; transition: transform 0.2s; }
+        .tool-card:hover .tool-icon { transform: scale(1.1); } /* Animation subtile */
+        
+        .tool-name { font-weight: 600; font-size: 1em; margin-bottom: 5px; }
+        .tool-desc { font-size: 0.85em; color: var(--text-muted); }
+
+        .info-btn {
+            position: absolute;
+            top: 8px; right: 8px;
+            background: #f1f3f5;
+            color: var(--text-muted);
+            border: none;
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        .info-btn:hover { background: var(--primary); color: white; }
+
+        .tool-info {
+            display: none;
+            background: #f8f9fa;
+            padding: 15px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85em;
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+        .tool-info.show { display: block; }
+
+        /* Boutons */
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 8px 8px 8px 0;
+            transition: background 0.2s ease;
+            box-shadow: none;
+        }
+        .btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        /* Exercice Matching */
+        .matching-exercise {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+        .matching-column {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+        .matching-item {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid #dee2e6;
+            transition: all 0.2s;
+        }
+        .matching-item:hover { border-color: var(--accent); background: white; }
+        .matching-item.selected { background-color: var(--primary); color: white; border-color: var(--primary); }
+        .matching-item.correct { background-color: var(--success); color: white; border-color: var(--success); }
+        .matching-item.incorrect { background-color: var(--danger); color: white; border-color: var(--danger); }
+
+        /* Résultats et Prompts */
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e8f5e9;
+            border-radius: 6px;
+            display: none;
+            border-left: 4px solid var(--success);
+            color: #1b5e20;
+        }
+        .result.show { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .prompt-card {
+            background-color: #fff8e1;
+            padding: 25px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #ffc107;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .prompt-card h4 { color: #e67e22; margin-bottom: 10px; }
+
+        .prompt-example {
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 12px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            border-left: 3px solid var(--primary);
+            color: #444;
+            font-size: 0.95em;
+            border: 1px solid #eee;
+        }
+
+        input, select, textarea {
+            font-family: inherit;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .matching-exercise { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Outils et prompts</h1>
+    </div>
+
+    <div class="section">
+        <div class="warning">
+            <h3>⚠️ Préambule éthique et sécurité - CRUCIAL !</h3>
+            <p><strong>Avant de tester une IA générative, rappelons les règles ESSENTIELLES :</strong></p>
+            <p style="margin: 15px 0; font-size: 1.05em;">
+                Les IA génératives <strong>collectent et utilisent les données</strong> que vous leur fournissez.
+                <strong style="color: var(--danger);">Tout ce que vous partagez peut être réutilisé.</strong>
+            </p>
+            <ul style="line-height: 1.8; margin-top: 15px; padding-left: 20px;">
+                <li><strong>❌ NE JAMAIS donner d'informations personnelles :</strong> Noms, adresses, établissements.</li>
+                <li><strong>❌ NE JAMAIS partager de documents sensibles :</strong> Copies, bulletins, données médicales.</li>
+                <li><strong>✅ Utiliser une adresse mail dédiée :</strong> Créez un compte "poubelle" ou pro dédié sans données réelles.</li>
+            </ul>
+            <p style="margin-top: 20px; font-weight: 600; color: #856404;">
+                🔐 Règle d'or : Si vous ne voulez pas que l'information se retrouve publique un jour, NE LA PARTAGEZ PAS.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>1. Panorama des outils d'IA générative</h2>
+        <div class="activity">
+            <div class="tool-category">
+                <h3>🤖 Grands modèles de langage</h3>
+                <div class="tool-grid">
+                    <div class="tool-card">
+                        <a href="https://chat.openai.com" target="_blank" class="tool-link">
+                            <div class="tool-icon">🗽</div>
+                            <div class="tool-name">ChatGPT</div>
+                            <div class="tool-desc">OpenAI - USA</div>
+                        </a>
+                        <button class="info-btn" onclick="toggleInfo('chatgpt')">ℹ️</button>
+                        <div id="info-chatgpt" class="tool-info">
+                            <strong>Gratuit :</strong> GPT-4o mini illimité.<br>
+                            <strong>Points forts :</strong> Polyvalent, référence.<br>
+                            <strong>RGPD :</strong> Non (USA).
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <a href="https://gemini.google.com" target="_blank" class="tool-link">
+                            <div class="tool-icon">🗽</div>
+                            <div class="tool-name">Gemini</div>
+                            <div class="tool-desc">Google - USA</div>
+                        </a>
+                        <button class="info-btn" onclick="toggleInfo('gemini')">ℹ️</button>
+                        <div id="info-gemini" class="tool-info">
+                            <strong>Gratuit :</strong> Gemini 1.5 Flash illimité.<br>
+                            <strong>Points forts :</strong> Multimodal, écosystème Google.<br>
+                            <strong>RGPD :</strong> Non (USA).
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <a href="https://claude.ai" target="_blank" class="tool-link">
+                            <div class="tool-icon">🗽</div>
+                            <div class="tool-name">Claude</div>
+                            <div class="tool-desc">Anthropic - USA</div>
+                        </a>
+                        <button class="info-btn" onclick="toggleInfo('claude')">ℹ️</button>
+                        <div id="info-claude" class="tool-info">
+                            <strong>Gratuit :</strong> Limité (~msg/jour).<br>
+                            <strong>Points forts :</strong> Rédaction, nuance, éthique.<br>
+                            <strong>RGPD :</strong> Non (USA).
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <a href="https://mistral.ai" target="_blank" class="tool-link">
+                            <div class="tool-icon">🥐</div>
+                            <div class="tool-name">Mistral AI</div>
+                            <div class="tool-desc">France</div>
+                        </a>
+                        <button class="info-btn" onclick="toggleInfo('mistral')">ℹ️</button>
+                        <div id="info-mistral" class="tool-info">
+                            <strong>Gratuit :</strong> "Le Chat" très généreux.<br>
+                            <strong>Points forts :</strong> Français, performant, sobre.<br>
+                            <strong>RGPD :</strong> Oui ✅.
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <a href="https://chat.deepseek.com" target="_blank" class="tool-link">
+                            <div class="tool-icon">🐼</div>
+                            <div class="tool-name">DeepSeek</div>
+                            <div class="tool-desc">Chine</div>
+                        </a>
+                        <button class="info-btn" onclick="toggleInfo('deepseek')">ℹ️</button>
+                        <div id="info-deepseek" class="tool-info">
+                            <strong>Gratuit :</strong> Illimité.<br>
+                            <strong>Points forts :</strong> Code, mathématiques.<br>
+                            <strong>RGPD :</strong> Non (Chine).
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <a href="https://www.perplexity.ai" target="_blank" class="tool-link">
+                            <div class="tool-icon">🗽</div>
+                            <div class="tool-name">Perplexity</div>
+                            <div class="tool-desc">USA</div>
+                        </a>
+                        <button class="info-btn" onclick="toggleInfo('perplexity')">ℹ️</button>
+                        <div id="info-perplexity" class="tool-info">
+                            <strong>Gratuit :</strong> Recherches web illimitées.<br>
+                            <strong>Points forts :</strong> Moteur de réponse sourcé.<br>
+                            <strong>RGPD :</strong> Non (USA).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-category">
+                <h3>🎨 Génération d'images</h3>
+                <div class="tool-grid">
+                    <div class="tool-card">
+                        <a href="https://ideogram.ai" target="_blank" class="tool-link">
+                            <div class="tool-icon">🖼️</div>
+                            <div class="tool-name">Ideogram</div>
+                            <div class="tool-desc">Texte dans Image</div>
+                        </a>
+                        <button class="info-btn" onclick="toggleInfo('ideogram')">ℹ️</button>
+                        <div id="info-ideogram" class="tool-info">
+                            <strong>Gratuit :</strong> ~20/jour.<br>
+                            <strong>Usage :</strong> Logos, affiches avec texte correct.
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <a href="https://www.craiyon.com" target="_blank" class="tool-link">
+                            <div class="tool-icon">🎨</div>
+                            <div class="tool-name">Craiyon</div>
+                            <div class="tool-desc">Simple</div>
+                        </a>
+                        <button class="info-btn" onclick="toggleInfo('craiyon')">ℹ️</button>
+                        <div id="info-craiyon" class="tool-info">
+                            <strong>Gratuit :</strong> Illimité, sans compte.<br>
+                            <strong>Usage :</strong> Tests rapides, qualité moyenne.
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <a href="https://www.bing.com/images/create" target="_blank" class="tool-link">
+                            <div class="tool-icon">🎭</div>
+                            <div class="tool-name">Bing Create</div>
+                            <div class="tool-desc">DALL-E 3</div>
+                        </a>
+                        <button class="info-btn" onclick="toggleInfo('bing')">ℹ️</button>
+                        <div id="info-bing" class="tool-info">
+                            <strong>Gratuit :</strong> 15 boosts/jour (compte Microsoft).<br>
+                            <strong>Usage :</strong> Haute qualité, polyvalent.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-category">
+                <h3>🎵 Audio & Présentations</h3>
+                <div class="tool-grid">
+                    <div class="tool-card">
+                        <a href="https://www.suno.ai" target="_blank" class="tool-link">
+                            <div class="tool-icon">🎼</div>
+                            <div class="tool-name">Suno</div>
+                            <div class="tool-desc">Chansons</div>
+                        </a>
+                        <button class="info-btn" onclick="toggleInfo('suno')">ℹ️</button>
+                        <div id="info-suno" class="tool-info">
+                            <strong>Gratuit :</strong> 50 crédits/jour.<br>
+                            <strong>Usage :</strong> Création de chansons complètes (paroles+musique).
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <a href="https://gamma.app" target="_blank" class="tool-link">
+                            <div class="tool-icon">📽️</div>
+                            <div class="tool-name">Gamma</div>
+                            <div class="tool-desc">Diaporamas</div>
+                        </a>
+                        <button class="info-btn" onclick="toggleInfo('gamma')">ℹ️</button>
+                        <div id="info-gamma" class="tool-info">
+                            <strong>Gratuit :</strong> Crédits à l'inscription.<br>
+                            <strong>Usage :</strong> Génère des slides PowerPoint/PDF complets.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box-blue">
+                <h4 style="margin-bottom: 10px; color: #0d47a1;">💡 Comment fonctionnent ces outils ?</h4>
+                <p>
+                    Toutes ces <strong>IA génératives</strong> fonctionnent sur le même principe : le <strong>Prompt</strong>.
+                    C'est l'instruction écrite que vous donnez à la machine.
+                    <br><br>
+                    <strong>Qualité du prompt = Qualité du résultat.</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>2. Qu'est-ce qu'un prompt ?</h2>
+        <div class="activity">
+            <p>Un <strong>prompt</strong> est l'instruction donnée à une IA. Plus il est précis, structuré et contextuel, meilleur sera le résultat.</p>
+            <div style="margin-top: 20px; padding: 15px; background-color: #e3f2fd; border-left: 4px solid #2196f3; border-radius: 4px;">
+                <p><strong>💡 Astuce pro :</strong> Fournir un <strong>exemple</strong> (un modèle de ce que vous voulez) guide l'IA de manière spectaculaire.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. Exercice : Les piliers du Prompt</h2>
+        <div class="activity">
+            <p><strong>Associez chaque terme à sa définition.</strong> Ce sont les 5 ingrédients d'un prompt réussi :</p>
+            <div class="matching-exercise">
+                <div class="matching-column">
+                    <p style="font-weight: bold; margin-bottom: 15px;">Termes</p>
+                    <div class="matching-item" onclick="selectItem(this)" data-id="persona">👥 Persona</div>
+                    <div class="matching-item" onclick="selectItem(this)" data-id="contexte">🎯 Contexte</div>
+                    <div class="matching-item" onclick="selectItem(this)" data-id="format">📋 Format</div>
+                    <div class="matching-item" onclick="selectItem(this)" data-id="contraintes">⚙️ Contraintes</div>
+                    <div class="matching-item" onclick="selectItem(this)" data-id="style">🎨 Style</div>
+                </div>
+                <div class="matching-column">
+                    <p style="font-weight: bold; margin-bottom: 15px;">Définitions</p>
+                    <div class="matching-item" onclick="selectItem(this)" data-answer="format">Type de livrable (tableau, liste, mail...)</div>
+                    <div class="matching-item" onclick="selectItem(this)" data-answer="persona">Rôle que l'IA doit adopter ou cible visée</div>
+                    <div class="matching-item" onclick="selectItem(this)" data-answer="style">Ton de la réponse (formel, ludique...)</div>
+                    <div class="matching-item" onclick="selectItem(this)" data-answer="contexte">Situation de départ et objectif</div>
+                    <div class="matching-item" onclick="selectItem(this)" data-answer="contraintes">Limites (longueur, mots interdits...)</div>
+                </div>
+            </div>
+            <button class="btn" onclick="checkMatching()">Vérifier</button>
+            <div id="matching-result" class="result"></div>
+            
+            <div id="matching-summary" class="info-box-green" style="display: none;">
+                <h3 style="color: #2e7d32; margin-bottom: 20px;">📚 Résumé : La structure PCFCS</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 10px;"><strong>1. Persona :</strong> "Agis comme un expert..." ou "Explique à un enfant de 8 ans..."</li>
+                    <li style="margin-bottom: 10px;"><strong>2. Contexte :</strong> "Je prépare un cours sur..."</li>
+                    <li style="margin-bottom: 10px;"><strong>3. Format :</strong> "Sous forme de tableau..."</li>
+                    <li style="margin-bottom: 10px;"><strong>4. Contraintes :</strong> "Moins de 200 mots..."</li>
+                    <li><strong>5. Style :</strong> "Ton encourageant..."</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>4. Comparatif : Prompt Simple vs Optimisé</h2>
+        <div class="activity">
+            <p>Testez la différence d'efficacité :</p>
+            <div style="display: flex; gap: 10px; margin: 20px 0;">
+                <button class="btn" onclick="showTextPrompt('simple')" style="background: #95a5a6;">Version Basique</button>
+                <button class="btn" onclick="showTextPrompt('engineered')">Version Optimisée</button>
+            </div>
+
+            <div id="text-prompt-simple" class="result">
+                <p><strong>Prompt :</strong> <em>« Qu'est-ce que la photosynthèse ? »</em></p>
+                <hr style="border: 0; border-top: 1px solid #ccc; margin: 10px 0;">
+                <p><small>Résultat probable : Une définition encyclopédique, peut-être trop complexe ou trop brève.</small></p>
+            </div>
+            <div id="text-prompt-engineered" class="result">
+                <p><strong>Prompt :</strong> <em>« Tu es un professeur de SVT pédagogue. Explique la photosynthèse à un élève de CM2. Utilise une analogie avec une cuisine ou une recette. Structure ta réponse en 3 points clés. »</em></p>
+                <hr style="border: 0; border-top: 1px solid #ccc; margin: 10px 0;">
+                <p><small>Résultat probable : Une explication imagée, adaptée au niveau, structurée et claire.</small></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>5. Le RAG : Discuter avec vos cours</h2>
+        <div class="activity">
+            <h3>Retrieval-Augmented Generation</h3>
+            <p>Au lieu de laisser l'IA inventer, fournissez-lui vos documents (PDF, Word) pour qu'elle travaille <strong>uniquement</strong> sur votre contenu.</p>
+            
+            <div class="info-box-green">
+                <h4 style="color: #2e7d32; margin-bottom: 10px;">✅ Applications pédagogiques</h4>
+                <ul style="margin-left: 20px;">
+                    <li>Générer des QCM basés strictement sur votre leçon.</li>
+                    <li>Adapter un texte complexe pour des élèves dyslexiques.</li>
+                    <li>Créer des fiches de révision à partir de vos notes.</li>
+                </ul>
+            </div>
+
+            <div class="prompt-card" style="background: #fff; border-left: 4px solid var(--primary);">
+                <h4 style="color: var(--primary);">🛠️ L'outil recommandé : NotebookLM (Google)</h4>
+                <p>C'est un outil gratuit dédié au RAG. Vous importez vos sources, et l'IA ne répond qu'en citant ces sources. Idéal pour éviter les hallucinations.</p>
+                <a href="https://notebooklm.google.com" target="_blank" class="btn" style="display:inline-block; margin-top:15px; text-decoration:none;">Tester NotebookLM</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>6. Atelier : Générateur de Prompt</h2>
+        <div class="activity">
+            <h3>🎯 Construisez votre super-prompt</h3>
+            <p style="margin-bottom: 20px;">Remplissez ce formulaire pour générer un prompt structuré prêt à l'emploi.</p>
+            
+            <div style="background: white; padding: 25px; border-radius: 6px; border: 1px solid var(--border-color);">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600;">📚 Sujet</label>
+                <input type="text" id="sujet" placeholder="Ex: La Seconde Guerre mondiale, Le théorème de Pythagore...">
+                
+                <label style="display: block; margin-bottom: 8px; font-weight: 600;">🎓 Cible (Persona/Niveau)</label>
+                <select id="niveau">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="élèves de CP-CE1 (6-8 ans)">Cycle 2 (CP-CE1)</option>
+                    <option value="élèves de CE2-CM2 (8-11 ans)">Cycle 3 (CE2-CM2)</option>
+                    <option value="collégiens (6ème-3ème)">Collège</option>
+                    <option value="lycéens">Lycée</option>
+                    <option value="étudiants">Supérieur</option>
+                </select>
+                
+                <label style="display: block; margin-bottom: 8px; font-weight: 600;">🎯 Objectif</label>
+                <select id="objectif">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="créer un plan de séquence">Créer un plan de cours</option>
+                    <option value="générer un QCM de 10 questions">Générer un QCM</option>
+                    <option value="proposer un exercice pratique">Créer un exercice</option>
+                    <option value="vulgariser le concept">Vulgariser / Expliquer</option>
+                    <option value="créer une fiche de mémorisation">Fiche de révision</option>
+                </select>
+                
+                <label style="display: block; margin-bottom: 8px; font-weight: 600;">⚙️ Contraintes (Optionnel)</label>
+                <input type="text" id="contraintes" placeholder="Ex: tableau à 3 colonnes, ton humoristique, moins de 300 mots...">
+                
+                <button class="btn" onclick="genererPrompt()" style="width: 100%;">✨ Générer le prompt</button>
+            </div>
+            
+            <div id="prompt-genere" class="result" style="background: #e3f2fd; border-left-color: #2196f3; color: #333;">
+                <h4 style="color: #0d47a1; margin-bottom: 15px;">📋 Votre prompt optimisé :</h4>
+                <div id="resultat-prompt" class="prompt-example" style="white-space: pre-wrap;"></div>
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <button class="btn" onclick="copierPrompt()">Copier</button>
+                    <button class="btn" onclick="resetPrompt()" style="background: #95a5a6;">Réinitialiser</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let selectedMatching = null;
+
+    function selectItem(element) {
+        if (element.closest('.matching-column').querySelector('p').textContent.includes('Termes')) {
+            document.querySelectorAll('.matching-column:first-child .matching-item').forEach(function(i) {
+                i.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            selectedMatching = element.dataset.id;
+        } else {
+            if (selectedMatching) {
+                var answer = element.dataset.answer;
+                if (selectedMatching === answer) {
+                    element.classList.add('correct');
+                    document.querySelector('[data-id="' + selectedMatching + '"]').classList.add('correct');
+                } else {
+                    element.classList.add('incorrect');
+                    document.querySelector('[data-id="' + selectedMatching + '"]').classList.add('incorrect');
+                }
+                selectedMatching = null;
+            }
+        }
+    }
+
+    function checkMatching() {
+        var result = document.getElementById('matching-result');
+        var correct = document.querySelectorAll('.matching-item.correct').length / 2;
+        result.innerHTML = '<strong>Résultat :</strong> ' + correct + '/5 associations correctes.';
+        result.classList.add('show');
+        
+        if(correct > 0) {
+             document.getElementById('matching-summary').style.display = 'block';
+             document.getElementById('matching-summary').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+
+    function showTextPrompt(type) {
+        document.querySelectorAll('#text-prompt-simple, #text-prompt-engineered').forEach(function(el) {
+            el.style.display = 'none';
+            el.classList.remove('show');
+        });
+        document.getElementById('text-prompt-' + type).style.display = 'block';
+        document.getElementById('text-prompt-' + type).classList.add('show');
+    }
+
+    function toggleInfo(toolId) {
+        var infoElement = document.getElementById('info-' + toolId);
+        var allInfos = document.querySelectorAll('.tool-info');
+        allInfos.forEach(function(info) {
+            if (info !== infoElement) info.classList.remove('show');
+        });
+        infoElement.classList.toggle('show');
+    }
+
+    function genererPrompt() {
+        var sujet = document.getElementById('sujet').value;
+        var niveau = document.getElementById('niveau').value;
+        var objectif = document.getElementById('objectif').value;
+        var contraintes = document.getElementById('contraintes').value;
+        
+        if (!sujet || !niveau || !objectif) {
+            alert('Merci de remplir au moins le sujet, le niveau et l\'objectif.');
+            return;
+        }
+        
+        var prompt = `Agis comme un expert pédagogique. Je souhaite ${objectif} sur le thème "${sujet}".
+Mon public cible est composé de ${niveau}.
+
+Instructions détaillées :
+1. Adapte le ton et la complexité pour ce niveau.
+2. Sois structuré et clair.`;
+
+        if (contraintes) {
+            prompt += `\n3. Contraintes supplémentaires : ${contraintes}`;
+        } else {
+            prompt += `\n3. Format attendu : N'hésite pas à utiliser des listes à puces ou des tableaux pour la lisibilité.`;
+        }
+        
+        document.getElementById('resultat-prompt').textContent = prompt;
+        document.getElementById('prompt-genere').style.display = 'block';
+        document.getElementById('prompt-genere').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function copierPrompt() {
+        var texte = document.getElementById('resultat-prompt').textContent;
+        navigator.clipboard.writeText(texte).then(function() {
+            alert('Copié !');
+        });
+    }
+
+    function resetPrompt() {
+        document.getElementById('sujet').value = '';
+        document.getElementById('niveau').value = '';
+        document.getElementById('objectif').value = '';
+        document.getElementById('contraintes').value = '';
+        document.getElementById('prompt-genere').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
