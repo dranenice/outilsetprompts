@@ -21,7 +21,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--text-main);
             background-color: var(--bg-body);
@@ -78,22 +78,23 @@
             margin-bottom: 25px;
             color: #856404;
         }
+
         .warning h3 { color: #856404; margin-bottom: 10px; font-size: 1.2em; border: none; }
 
         .info-box-blue {
-            margin-top: 40px; 
-            padding: 25px; 
-            background-color: #e3f2fd; 
-            border-radius: 6px; 
+            margin-top: 40px;
+            padding: 25px;
+            background-color: #e3f2fd;
+            border-radius: 6px;
             border-left: 4px solid #2196f3;
             color: #0d47a1;
         }
 
         .info-box-green {
-            margin: 25px 0; 
-            padding: 25px; 
-            background-color: #e8f5e9; 
-            border-radius: 6px; 
+            margin: 25px 0;
+            padding: 25px;
+            background-color: #e8f5e9;
+            border-radius: 6px;
             border-left: 4px solid #4caf50;
         }
 
@@ -106,7 +107,7 @@
         }
 
         .tool-category { margin-bottom: 40px; }
-        
+
         .tool-category h3 {
             color: var(--primary);
             font-size: 1.3em;
@@ -149,12 +150,15 @@
             text-decoration: none;
             color: var(--text-main);
         }
+
         .tool-card:hover .tool-link { color: var(--accent); }
 
         .tool-icon { font-size: 2.5em; margin-bottom: 15px; transition: transform 0.2s; }
+
         .tool-card:hover .tool-icon { transform: scale(1.1); } /* Animation subtile */
-        
+
         .tool-name { font-weight: 600; font-size: 1em; margin-bottom: 5px; }
+
         .tool-desc { font-size: 0.85em; color: var(--text-muted); }
 
         .info-btn {
@@ -169,6 +173,7 @@
             font-size: 14px;
             transition: all 0.2s ease;
         }
+
         .info-btn:hover { background: var(--primary); color: white; }
 
         .tool-info {
@@ -180,6 +185,7 @@
             color: var(--text-main);
             line-height: 1.5;
         }
+
         .tool-info.show { display: block; }
 
         /* Boutons */
@@ -193,9 +199,10 @@
             font-size: 16px;
             font-weight: 600;
             margin: 8px 8px 8px 0;
-            transition: background 0.2s ease;
+            transition: background 0.2s ease, transform 0.2s ease;
             box-shadow: none;
         }
+
         .btn:hover {
             background-color: var(--accent);
             transform: translateY(-1px);
@@ -208,12 +215,14 @@
             gap: 30px;
             margin: 25px 0;
         }
+
         .matching-column {
             background: white;
             padding: 20px;
             border-radius: 6px;
             border: 1px solid var(--border-color);
         }
+
         .matching-item {
             background: #f8f9fa;
             padding: 12px 15px;
@@ -222,11 +231,117 @@
             cursor: pointer;
             border: 1px solid #dee2e6;
             transition: all 0.2s;
+            user-select: none; /* Empêche la sélection de texte */
         }
+
         .matching-item:hover { border-color: var(--accent); background: white; }
+
         .matching-item.selected { background-color: var(--primary); color: white; border-color: var(--primary); }
+
         .matching-item.correct { background-color: var(--success); color: white; border-color: var(--success); }
+
         .matching-item.incorrect { background-color: var(--danger); color: white; border-color: var(--danger); }
+
+        /* Styles for Section 4: Prompt Comparison */
+        .prompt-example-card {
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border: 1px solid #e1e4e8;
+        }
+
+        .prompt-example-header {
+            padding: 10px 25px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .prompt-badge {
+            color: white;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.9em;
+        }
+
+        .badge-faible { background-color: var(--danger); }
+        .badge-moyen { background-color: var(--warning); }
+        .badge-excellent { background-color: var(--success); }
+
+        .prompt-example-content {
+            padding: 20px 25px;
+            background-color: white;
+            position: relative;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .prompt-display {
+            white-space: pre-wrap;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.95em;
+            padding-right: 80px; /* Space for copy button */
+            color: var(--text-main);
+            border-left: 3px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        .copy-btn-inline {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #f1f3f5;
+            color: var(--primary);
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s ease;
+            font-weight: 600;
+        }
+
+        .copy-btn-inline:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .analyse-btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 25px;
+            background-color: #f8f9fa;
+            color: var(--text-muted);
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s;
+            border-top: 1px solid #e1e4e8;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .analyse-btn:hover {
+            background-color: #e9ecef;
+            color: var(--primary);
+        }
+
+        .analyse-box {
+            padding: 20px 25px;
+            background-color: #fdf6e3; /* Light yellow background */
+            border-top: 1px solid var(--warning);
+            display: none;
+            color: #444;
+            font-size: 0.95em;
+            border-radius: 0 0 8px 8px;
+        }
+        .analyse-box.show { display: block; }
 
         /* Résultats et Prompts */
         .result {
@@ -238,7 +353,9 @@
             border-left: 4px solid var(--success);
             color: #1b5e20;
         }
+
         .result.show { display: block; animation: fadeIn 0.3s; }
+
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .prompt-card {
@@ -249,6 +366,7 @@
             border-left: 4px solid #ffc107;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
+
         .prompt-card h4 { color: #e67e22; margin-bottom: 10px; }
 
         .prompt-example {
@@ -262,6 +380,17 @@
             font-size: 0.95em;
             border: 1px solid #eee;
         }
+        
+        /* Message box for non-alert errors/messages */
+        .message-box {
+            padding: 15px;
+            background-color: #fce3e3; /* Light red for error */
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
 
         input, select, textarea {
             font-family: inherit;
@@ -271,6 +400,7 @@
             width: 100%;
             margin-bottom: 20px;
         }
+
         input:focus, select:focus, textarea:focus {
             border-color: var(--accent);
             outline: none;
@@ -280,6 +410,7 @@
         @media (max-width: 768px) {
             .header h1 { font-size: 2em; }
             .matching-exercise { grid-template-columns: 1fr; }
+            .tool-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
         }
     </style>
 </head>
@@ -303,6 +434,27 @@
                 <li><strong>❌ NE JAMAIS partager de documents sensibles :</strong> Copies, bulletins, données médicales.</li>
                 <li><strong>✅ Utiliser une adresse mail dédiée :</strong> Créez un compte "poubelle" ou pro dédié sans données réelles.</li>
             </ul>
+            
+            <hr style="border: 0; border-top: 1px solid #f39c12; margin: 20px 0;">
+            
+            <h4 style="color: #856404; margin-bottom: 10px;">💡 Astuce utile : Alias d'adresse mail</h4>
+            <ul style="line-height: 1.6; padding-left: 20px;">
+                <li>Mettre en place des alias d’adresse mail pour créer vos comptes de test constitue une mesure de protection supplémentaire.</li>
+                <li><strong>Avantages :</strong>
+                    <ul style="padding-left: 20px; list-style-type: circle;">
+                        <li>Préserver votre adresse principale.</li>
+                        <li>Limiter les risques d’usurpation.</li>
+                        <li>Identifier rapidement une éventuelle fuite : si un alias dédié à un service précis commence à recevoir des messages inattendus, la source de la compromission est immédiatement visible.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4 style="color: var(--danger); margin-top: 20px; margin-bottom: 10px;">⚠️ Rappel essentiel (Encadrement des élèves)</h4>
+            <p style="font-weight: 600;">
+                Aucun élève ne doit créer de compte personnel sur une IA grand public.
+                Toute utilisation doit passer par un compte générique ou institutionnel strictement encadré.
+            </p>
+
             <p style="margin-top: 20px; font-weight: 600; color: #856404;">
                 🔐 Règle d'or : Si vous ne voulez pas que l'information se retrouve publique un jour, NE LA PARTAGEZ PAS.
             </p>
@@ -328,7 +480,6 @@
                             <strong>RGPD :</strong> Non (USA).
                         </div>
                     </div>
-                    
                     <div class="tool-card">
                         <a href="https://gemini.google.com" target="_blank" class="tool-link">
                             <div class="tool-icon">🗽</div>
@@ -342,7 +493,6 @@
                             <strong>RGPD :</strong> Non (USA).
                         </div>
                     </div>
-                    
                     <div class="tool-card">
                         <a href="https://claude.ai" target="_blank" class="tool-link">
                             <div class="tool-icon">🗽</div>
@@ -356,7 +506,6 @@
                             <strong>RGPD :</strong> Non (USA).
                         </div>
                     </div>
-                    
                     <div class="tool-card">
                         <a href="https://mistral.ai" target="_blank" class="tool-link">
                             <div class="tool-icon">🥐</div>
@@ -370,7 +519,6 @@
                             <strong>RGPD :</strong> Oui ✅.
                         </div>
                     </div>
-                    
                     <div class="tool-card">
                         <a href="https://chat.deepseek.com" target="_blank" class="tool-link">
                             <div class="tool-icon">🐼</div>
@@ -384,7 +532,6 @@
                             <strong>RGPD :</strong> Non (Chine).
                         </div>
                     </div>
-                    
                     <div class="tool-card">
                         <a href="https://www.perplexity.ai" target="_blank" class="tool-link">
                             <div class="tool-icon">🗽</div>
@@ -399,6 +546,18 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- NOUVEL AVERTISSEMENT SUR L'ENTRAÎNEMENT DES LLM -->
+                <div style="padding: 15px; background-color: #fce4ec; border-left: 4px solid var(--danger); border-radius: 4px; margin-top: 15px;">
+                    <p style="font-weight: 600; color: var(--danger);">
+                        ⚠️ Attention : Utilisation des données pour l'entraînement
+                    </p>
+                    <p style="font-size: 0.95em; margin-top: 8px; color: var(--text-main);">
+                        Il faut garder à l’esprit que l’utilisation d’un LLM (que ce soit avec ou sans compte, et parfois même avec abonnement) peut impliquer que nos données servent à entraîner ou améliorer les modèles : ce sont justement ces données utilisateur qui permettent aux systèmes d’évoluer rapidement et à moindre coût.
+                    </p>
+                </div>
+                <!-- FIN NOUVEL AVERTISSEMENT -->
+                
             </div>
 
             <div class="tool-category">
@@ -416,7 +575,6 @@
                             <strong>Usage :</strong> Logos, affiches avec texte correct.
                         </div>
                     </div>
-                    
                     <div class="tool-card">
                         <a href="https://www.craiyon.com" target="_blank" class="tool-link">
                             <div class="tool-icon">🎨</div>
@@ -429,7 +587,6 @@
                             <strong>Usage :</strong> Tests rapides, qualité moyenne.
                         </div>
                     </div>
-                    
                     <div class="tool-card">
                         <a href="https://www.bing.com/images/create" target="_blank" class="tool-link">
                             <div class="tool-icon">🎭</div>
@@ -446,7 +603,7 @@
             </div>
 
             <div class="tool-category">
-                <h3>🎵 Audio & Présentations</h3>
+                <h3>🎵 Audio & présentations</h3>
                 <div class="tool-grid">
                     <div class="tool-card">
                         <a href="https://www.suno.ai" target="_blank" class="tool-link">
@@ -460,7 +617,6 @@
                             <strong>Usage :</strong> Création de chansons complètes (paroles+musique).
                         </div>
                     </div>
-                    
                     <div class="tool-card">
                         <a href="https://gamma.app" target="_blank" class="tool-link">
                             <div class="tool-icon">📽️</div>
@@ -499,7 +655,7 @@
     </div>
 
     <div class="section">
-        <h2>3. Exercice : Les piliers du Prompt</h2>
+        <h2>3. Exercice : Les piliers du prompt</h2>
         <div class="activity">
             <p><strong>Associez chaque terme à sa définition.</strong> Ce sont les 5 ingrédients d'un prompt réussi :</p>
             <div class="matching-exercise">
@@ -522,7 +678,6 @@
             </div>
             <button class="btn" onclick="checkMatching()">Vérifier</button>
             <div id="matching-result" class="result"></div>
-            
             <div id="matching-summary" class="info-box-green" style="display: none;">
                 <h3 style="color: #2e7d32; margin-bottom: 20px;">📚 Résumé : La structure PCFCS</h3>
                 <ul style="list-style: none; padding: 0;">
@@ -537,33 +692,140 @@
     </div>
 
     <div class="section">
-        <h2>4. Comparatif : Prompt Simple vs Optimisé</h2>
+        <h2>4. Comparatif : Prompt simple vs optimisé</h2>
         <div class="activity">
-            <p>Testez la différence d'efficacité :</p>
-            <div style="display: flex; gap: 10px; margin: 20px 0;">
-                <button class="btn" onclick="showTextPrompt('simple')" style="background: #95a5a6;">Version Basique</button>
-                <button class="btn" onclick="showTextPrompt('engineered')">Version Optimisée</button>
+            <h4>📊 Exemples : De faible à excellent</h4>
+            
+            <!-- PROMPT FAIBLE -->
+            <div class="prompt-example-card prompt-faible">
+                <div class="prompt-example-header">
+                    <span class="prompt-badge badge-faible">❌ FAIBLE</span>
+                </div>
+                <div class="prompt-example-content">
+                    <div class="prompt-display">
+                        Quelles sont les différentes IA ?
+                    </div>
+                    <button class="copy-btn-inline" onclick="copyText('prompt-faible-text')">📋 Copier</button>
+                    <div id="prompt-faible-text" style="display:none;">Quelles sont les différentes IA ?</div>
+                </div>
+                <button class="analyse-btn" onclick="togglePrompt('analyse-faible')">
+                    🔍 Analyse du prompt
+                </button>
+                <div id="analyse-faible" class="analyse-box">
+                    <strong>Problème :</strong> Question trop vague, pas de contexte, pas de format demandé, aucune précision sur le type d'IA ou le niveau d'explication attendu.
+                </div>
             </div>
 
-            <div id="text-prompt-simple" class="result">
-                <p><strong>Prompt :</strong> <em>« Qu'est-ce que la photosynthèse ? »</em></p>
-                <hr style="border: 0; border-top: 1px solid #ccc; margin: 10px 0;">
-                <p><small>Résultat probable : Une définition encyclopédique, peut-être trop complexe ou trop brève.</small></p>
+            <!-- PROMPT MOYEN -->
+            <div class="prompt-example-card prompt-moyen">
+                <div class="prompt-example-header">
+                    <span class="prompt-badge badge-moyen">⚡ MOYEN</span>
+                </div>
+                <div class="prompt-example-content">
+                    <div class="prompt-display">
+                        Explique-moi les différents types d'intelligence artificielle qui existent aujourd'hui, en 200 mots maximum.
+                    </div>
+                    <button class="copy-btn-inline" onclick="copyText('prompt-moyen-text')">📋 Copier</button>
+                    <div id="prompt-moyen-text" style="display:none;">Explique-moi les différents types d'intelligence artificielle qui existent aujourd'hui, en 200 mots maximum.</div>
+                </div>
+                <button class="analyse-btn" onclick="togglePrompt('analyse-moyen')">
+                    🔍 Analyse du prompt
+                </button>
+                <div id="analyse-moyen" class="analyse-box">
+                    <strong>Mieux :</strong> Contrainte de longueur ajoutée et précision temporelle ("aujourd'hui"), mais manque de contexte d'usage, de public cible et de structure de réponse.
+                </div>
             </div>
-            <div id="text-prompt-engineered" class="result">
-                <p><strong>Prompt :</strong> <em>« Tu es un professeur de SVT pédagogue. Explique la photosynthèse à un élève de CM2. Utilise une analogie avec une cuisine ou une recette. Structure ta réponse en 3 points clés. »</em></p>
-                <hr style="border: 0; border-top: 1px solid #ccc; margin: 10px 0;">
-                <p><small>Résultat probable : Une explication imagée, adaptée au niveau, structurée et claire.</small></p>
+
+            <!-- PROMPT EXCELLENT -->
+            <div class="prompt-example-card prompt-excellent">
+                <div class="prompt-example-header">
+                    <span class="prompt-badge badge-excellent">✅ EXCELLENT</span>
+                </div>
+                <div class="prompt-example-content">
+                    <div class="prompt-display">
+                        En tant qu'expert en IA, crée une synthèse des différents types d'intelligence artificielle pour des enseignants du secondaire qui découvrent le sujet.
+Objectif : Expliquer les principales catégories d'IA en 200 mots maximum.
+Format :
+- Introduction brève (1 phrase)
+- 3 types d'IA avec nom, définition courte et exemple concret
+- Conclusion sur l'évolution actuelle
+Ton : Pédagogique et accessible
+                    </div>
+                    <button class="copy-btn-inline" onclick="copyText('prompt-excellent-text')">📋 Copier</button>
+                    <div id="prompt-excellent-text" style="display:none;">En tant qu'expert en IA, crée une synthèse des différents types d'intelligence artificielle pour des enseignants du secondaire qui découvrent le sujet.
+Objectif : Expliquer les principales catégories d'IA en 200 mots maximum.
+Format :
+- Introduction brève (1 phrase)
+- 3 types d'IA avec nom, définition courte et exemple concret
+- Conclusion sur l'évolution actuelle
+Ton : Pédagogique et accessible</div>
+                </div>
+                <button class="analyse-btn" onclick="togglePrompt('analyse-excellent')">
+                    🔍 Analyse du prompt
+                </button>
+                <div id="analyse-excellent" class="analyse-box">
+                    <strong>Parfait :</strong> Rôle défini + Contexte (public cible) + Tâche claire + Format structuré + Contraintes (longueur, ton) = Réponse optimale et exploitable.
+                </div>
             </div>
         </div>
     </div>
 
     <div class="section">
-        <h2>5. Le RAG : Discuter avec vos cours</h2>
+        <h2>5. Atelier : Générateur de prompt</h2>
+        <div class="activity">
+            <h3>🎯 Construisez votre super-prompt</h3>
+            <p style="margin-bottom: 20px;">Remplissez ce formulaire pour générer un prompt structuré prêt à l'emploi.</p>
+
+            <div style="background: white; padding: 25px; border-radius: 6px; border: 1px solid var(--border-color);">
+                <!-- Message box for errors -->
+                <div class="message-box" id="prompt-error-message"></div>
+
+                <label style="display: block; margin-bottom: 8px; font-weight: 600;">📚 Sujet</label>
+                <input type="text" id="sujet" placeholder="Ex: La Seconde Guerre mondiale, Le théorème de Pythagore...">
+
+                <label style="display: block; margin-bottom: 8px; font-weight: 600;">🎓 Cible (Persona/Niveau)</label>
+                <select id="niveau">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="élèves de CP-CE1 (6-8 ans)">Cycle 2 (CP-CE1)</option>
+                    <option value="élèves de CE2-CM2 (8-11 ans)">Cycle 3 (CE2-CM2)</option>
+                    <option value="collégiens (6ème-3ème)">Collège</option>
+                    <option value="lycéens">Lycée</option>
+                    <option value="étudiants">Supérieur</option>
+                </select>
+
+                <label style="display: block; margin-bottom: 8px; font-weight: 600;">🎯 Objectif</label>
+                <select id="objectif">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="créer un plan de séquence">Créer un plan de cours</option>
+                    <option value="générer un QCM de 10 questions">Générer un QCM</option>
+                    <option value="proposer un exercice pratique">Créer un exercice</option>
+                    <option value="vulgariser le concept">Vulgariser / Expliquer</option>
+                    <option value="créer une fiche de mémorisation">Fiche de révision</option>
+                </select>
+
+                <label style="display: block; margin-bottom: 8px; font-weight: 600;">⚙️ Contraintes (Optionnel)</label>
+                <input type="text" id="contraintes" placeholder="Ex: tableau à 3 colonnes, ton humoristique, moins de 300 mots...">
+
+                <button class="btn" onclick="genererPrompt()" style="width: 100%;">✨ Générer le prompt</button>
+            </div>
+
+            <div id="prompt-genere" class="result" style="background: #e3f2fd; border-left-color: #2196f3; color: #333;">
+                <h4 style="color: #0d47a1; margin-bottom: 15px;">📋 Votre prompt optimisé :</h4>
+                <div id="resultat-prompt" class="prompt-example" style="white-space: pre-wrap;"></div>
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <button class="btn" onclick="copierPrompt()">Copier</button>
+                    <button class="btn" onclick="resetPrompt()" style="background: #95a5a6;">Réinitialiser</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>6. Le RAG : Discuter avec vos cours</h2>
         <div class="activity">
             <h3>Retrieval-Augmented Generation</h3>
             <p>Au lieu de laisser l'IA inventer, fournissez-lui vos documents (PDF, Word) pour qu'elle travaille <strong>uniquement</strong> sur votre contenu.</p>
-            
+
             <div class="info-box-green">
                 <h4 style="color: #2e7d32; margin-bottom: 10px;">✅ Applications pédagogiques</h4>
                 <ul style="margin-left: 20px;">
@@ -580,101 +842,102 @@
             </div>
         </div>
     </div>
-
-    <div class="section">
-        <h2>6. Atelier : Générateur de Prompt</h2>
-        <div class="activity">
-            <h3>🎯 Construisez votre super-prompt</h3>
-            <p style="margin-bottom: 20px;">Remplissez ce formulaire pour générer un prompt structuré prêt à l'emploi.</p>
-            
-            <div style="background: white; padding: 25px; border-radius: 6px; border: 1px solid var(--border-color);">
-                <label style="display: block; margin-bottom: 8px; font-weight: 600;">📚 Sujet</label>
-                <input type="text" id="sujet" placeholder="Ex: La Seconde Guerre mondiale, Le théorème de Pythagore...">
-                
-                <label style="display: block; margin-bottom: 8px; font-weight: 600;">🎓 Cible (Persona/Niveau)</label>
-                <select id="niveau">
-                    <option value="">-- Sélectionner --</option>
-                    <option value="élèves de CP-CE1 (6-8 ans)">Cycle 2 (CP-CE1)</option>
-                    <option value="élèves de CE2-CM2 (8-11 ans)">Cycle 3 (CE2-CM2)</option>
-                    <option value="collégiens (6ème-3ème)">Collège</option>
-                    <option value="lycéens">Lycée</option>
-                    <option value="étudiants">Supérieur</option>
-                </select>
-                
-                <label style="display: block; margin-bottom: 8px; font-weight: 600;">🎯 Objectif</label>
-                <select id="objectif">
-                    <option value="">-- Sélectionner --</option>
-                    <option value="créer un plan de séquence">Créer un plan de cours</option>
-                    <option value="générer un QCM de 10 questions">Générer un QCM</option>
-                    <option value="proposer un exercice pratique">Créer un exercice</option>
-                    <option value="vulgariser le concept">Vulgariser / Expliquer</option>
-                    <option value="créer une fiche de mémorisation">Fiche de révision</option>
-                </select>
-                
-                <label style="display: block; margin-bottom: 8px; font-weight: 600;">⚙️ Contraintes (Optionnel)</label>
-                <input type="text" id="contraintes" placeholder="Ex: tableau à 3 colonnes, ton humoristique, moins de 300 mots...">
-                
-                <button class="btn" onclick="genererPrompt()" style="width: 100%;">✨ Générer le prompt</button>
-            </div>
-            
-            <div id="prompt-genere" class="result" style="background: #e3f2fd; border-left-color: #2196f3; color: #333;">
-                <h4 style="color: #0d47a1; margin-bottom: 15px;">📋 Votre prompt optimisé :</h4>
-                <div id="resultat-prompt" class="prompt-example" style="white-space: pre-wrap;"></div>
-                <div style="display: flex; gap: 10px; margin-top: 15px;">
-                    <button class="btn" onclick="copierPrompt()">Copier</button>
-                    <button class="btn" onclick="resetPrompt()" style="background: #95a5a6;">Réinitialiser</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script>
     let selectedMatching = null;
 
+    // Fonction utilitaire pour obtenir la valeur d'une variable CSS
+    function getCssVariable(name) {
+        return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    /**
+     * Gère la sélection des items de l'exercice d'association (Matching).
+     * @param {HTMLElement} element - L'élément cliqué.
+     */
     function selectItem(element) {
-        if (element.closest('.matching-column').querySelector('p').textContent.includes('Termes')) {
+        // NOTE: La réinitialisation globale des classes 'correct' et 'incorrect' a été retirée ici,
+        // car elle empêchait l'utilisateur de terminer l'exercice. Les classes sont persistantes.
+
+        let column = element.closest('.matching-column');
+        let isTermColumn = column.querySelector('p').textContent.includes('Termes');
+        
+        // Si l'élément est déjà marqué comme correct/incorrect, on ne fait rien.
+        if (element.classList.contains('correct') || element.classList.contains('incorrect')) {
+            return;
+        }
+
+        if (isTermColumn) {
+            // Colonne 1 : Termes
             document.querySelectorAll('.matching-column:first-child .matching-item').forEach(function(i) {
                 i.classList.remove('selected');
             });
             element.classList.add('selected');
             selectedMatching = element.dataset.id;
         } else {
+            // Colonne 2 : Définitions
             if (selectedMatching) {
+                var termElement = document.querySelector('[data-id="' + selectedMatching + '"]');
+
                 var answer = element.dataset.answer;
                 if (selectedMatching === answer) {
                     element.classList.add('correct');
-                    document.querySelector('[data-id="' + selectedMatching + '"]').classList.add('correct');
+                    termElement.classList.add('correct');
                 } else {
                     element.classList.add('incorrect');
-                    document.querySelector('[data-id="' + selectedMatching + '"]').classList.add('incorrect');
+                    termElement.classList.add('incorrect');
                 }
+                
+                // Désélectionner le terme
+                termElement.classList.remove('selected');
                 selectedMatching = null;
             }
         }
     }
 
+    /**
+     * Vérifie le résultat final de l'exercice d'association.
+     */
     function checkMatching() {
         var result = document.getElementById('matching-result');
-        var correct = document.querySelectorAll('.matching-item.correct').length / 2;
-        result.innerHTML = '<strong>Résultat :</strong> ' + correct + '/5 associations correctes.';
-        result.classList.add('show');
+        // Compter le nombre de paires correctes (Terme et Définition)
+        var correctDefinitions = document.querySelectorAll('.matching-column:last-child .matching-item.correct').length;
         
-        if(correct > 0) {
+        result.innerHTML = `<strong>Résultat :</strong> ${correctDefinitions}/5 associations correctes.`;
+        result.classList.add('show');
+
+        // Afficher le résumé si toutes les associations sont correctes
+        if(correctDefinitions === 5) {
              document.getElementById('matching-summary').style.display = 'block';
              document.getElementById('matching-summary').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+             document.getElementById('matching-summary').style.display = 'none';
         }
     }
 
+    /**
+     * Affiche l'un des deux exemples de prompt. (Fonction obsolète, mais conservée si nécessaire)
+     * @param {string} type - 'simple' ou 'engineered'.
+     */
     function showTextPrompt(type) {
+        // Cette fonction n'est plus utilisée pour la section 4 mais reste pour l'initialisation
+        // du cas 'simple' dans window.onload.
         document.querySelectorAll('#text-prompt-simple, #text-prompt-engineered').forEach(function(el) {
             el.style.display = 'none';
             el.classList.remove('show');
         });
-        document.getElementById('text-prompt-' + type).style.display = 'block';
-        document.getElementById('text-prompt-' + type).classList.add('show');
+        // Si ces IDs sont présents, les afficher, sinon ne rien faire.
+        if (document.getElementById('text-prompt-' + type)) {
+            document.getElementById('text-prompt-' + type).style.display = 'block';
+            document.getElementById('text-prompt-' + type).classList.add('show');
+        }
     }
 
+    /**
+     * Ouvre/ferme les boîtes d'information des outils.
+     * @param {string} toolId - L'ID de l'outil.
+     */
     function toggleInfo(toolId) {
         var infoElement = document.getElementById('info-' + toolId);
         var allInfos = document.querySelectorAll('.tool-info');
@@ -684,49 +947,146 @@
         infoElement.classList.toggle('show');
     }
 
+    /**
+     * Ouvre/ferme l'analyse d'un prompt dans la section 4.
+     * @param {string} elementId - L'ID de la boîte d'analyse.
+     */
+    function togglePrompt(elementId) {
+        var analyseBox = document.getElementById(elementId);
+        analyseBox.classList.toggle('show');
+    }
+
+    /**
+     * Génère le prompt structuré à partir du formulaire.
+     */
     function genererPrompt() {
         var sujet = document.getElementById('sujet').value;
         var niveau = document.getElementById('niveau').value;
         var objectif = document.getElementById('objectif').value;
         var contraintes = document.getElementById('contraintes').value;
-        
+        var errorMessage = document.getElementById('prompt-error-message');
+
+        errorMessage.style.display = 'none'; // Cacher l'erreur par défaut
+
         if (!sujet || !niveau || !objectif) {
-            alert('Merci de remplir au moins le sujet, le niveau et l\'objectif.');
+            // Afficher le message d'erreur personnalisé
+            errorMessage.textContent = 'Merci de remplir au moins le sujet, le niveau et l\'objectif.';
+            errorMessage.style.display = 'block';
             return;
         }
-        
+
         var prompt = `Agis comme un expert pédagogique. Je souhaite ${objectif} sur le thème "${sujet}".
+
 Mon public cible est composé de ${niveau}.
 
 Instructions détaillées :
 1. Adapte le ton et la complexité pour ce niveau.
 2. Sois structuré et clair.`;
-
+        
         if (contraintes) {
             prompt += `\n3. Contraintes supplémentaires : ${contraintes}`;
         } else {
             prompt += `\n3. Format attendu : N'hésite pas à utiliser des listes à puces ou des tableaux pour la lisibilité.`;
         }
-        
+
         document.getElementById('resultat-prompt').textContent = prompt;
         document.getElementById('prompt-genere').style.display = 'block';
+        document.getElementById('prompt-genere').classList.add('show');
         document.getElementById('prompt-genere').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
+    /**
+     * Copie le prompt généré dans le presse-papiers et affiche une confirmation.
+     * Gère la copie pour le générateur (section 6).
+     */
     function copierPrompt() {
         var texte = document.getElementById('resultat-prompt').textContent;
+        var copyBtn = document.querySelector('.btn[onclick="copierPrompt()"]');
+        
+        // Stocker l'état original
+        var originalText = copyBtn.textContent;
+        var originalBg = getCssVariable('--primary'); 
+        
+        // Lire la couleur de confirmation
+        const successColor = getCssVariable('--success');
+
         navigator.clipboard.writeText(texte).then(function() {
-            alert('Copié !');
+            // Confirmation visuelle sur le bouton
+            copyBtn.textContent = '✅ Copié !';
+            copyBtn.style.backgroundColor = successColor; // Utilisation de la variable CSS via JS
+            copyBtn.style.transform = 'scale(1.05)';
+            
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+                copyBtn.style.backgroundColor = originalBg; // Restauration de la couleur originale
+                copyBtn.style.transform = 'none';
+            }, 1500);
+        }).catch(err => {
+            console.error('Erreur de copie:', err);
+            // Fallback pour afficher l'erreur si la copie échoue
+            var errorMessage = document.getElementById('prompt-error-message');
+            errorMessage.textContent = 'Échec de la copie. Veuillez copier manuellement.';
+            errorMessage.style.display = 'block';
+            setTimeout(() => { errorMessage.style.display = 'none'; }, 3000);
         });
     }
 
+    /**
+     * Copie le texte à partir d'un élément masqué et affiche une confirmation.
+     * Gère la copie pour les exemples (section 4).
+     * @param {string} elementId - L'ID de l'élément HIDDEN contenant le texte à copier.
+     */
+    function copyText(elementId) {
+        var textElement = document.getElementById(elementId);
+        var textToCopy = textElement.textContent;
+        
+        // Trouver le bouton de copie inline correspondant à cet elementId
+        var copyBtn = textElement.closest('.prompt-example-content').querySelector('.copy-btn-inline');
+        var originalHtml = copyBtn.innerHTML;
+        const successColor = getCssVariable('--success');
+        const primaryColor = getCssVariable('--primary'); // Couleur de reset pour le texte
+        
+        // Couleur de fond de reset pour le bouton inline
+        const resetBgColor = '#f1f3f5'; 
+
+        navigator.clipboard.writeText(textToCopy).then(function() {
+            // Confirmation visuelle sur le bouton
+            copyBtn.innerHTML = '✅ Copié !';
+            copyBtn.style.backgroundColor = successColor;
+            copyBtn.style.color = 'white';
+            
+            setTimeout(() => {
+                copyBtn.innerHTML = originalHtml;
+                copyBtn.style.backgroundColor = resetBgColor;
+                copyBtn.style.color = primaryColor;
+            }, 1500);
+        }).catch(err => {
+            console.error('Erreur de copie:', err);
+            // Fallback: Utiliser la boîte de message principale pour l'erreur
+            var errorMessage = document.getElementById('prompt-error-message');
+            errorMessage.textContent = 'Échec de la copie. Veuillez copier manuellement.';
+            errorMessage.style.display = 'block';
+            setTimeout(() => { errorMessage.style.display = 'none'; }, 3000);
+        });
+    }
+
+    /**
+     * Réinitialise le formulaire du générateur de prompt.
+     */
     function resetPrompt() {
         document.getElementById('sujet').value = '';
         document.getElementById('niveau').value = '';
         document.getElementById('objectif').value = '';
         document.getElementById('contraintes').value = '';
         document.getElementById('prompt-genere').style.display = 'none';
+        document.getElementById('prompt-error-message').style.display = 'none';
     }
+
+    // Initialisation : (Ne plus appeler showTextPrompt('simple') car la section 4 n'a plus cette structure)
+    // Reste la fonction car elle est un bon exemple des principes de programmation
+    window.onload = function() {
+        // Aucune action nécessaire ici car les blocs sont statiques maintenant
+    };
 </script>
 
 </body>
